@@ -10,9 +10,13 @@ var users = require('./routes/users');
 
 var app = express();
 
+var Socket = require('./socket/socket');
+var socket = new Socket();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('socket', socket);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
