@@ -1,7 +1,7 @@
 const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyEsPlugin = require('uglifyes-webpack-plugin');
 
 const entryDirectory = './src/vue/entries/';
 const entryRule = entryDirectory + '**/*.js';
@@ -47,7 +47,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new UglifyJSPlugin(),
+    new UglifyEsPlugin(),
   ],
   resolve: {
     modules: [
