@@ -5,6 +5,9 @@
     <mdl-button v-on:click.native="sendPing()">send ping</mdl-button>
     <div class="mdl-layout">
       <div class="mdl-grid">
+        <p>count: {{count}}, AVG: {{totalDelta / count}}</p>
+      </div>
+      <div class="mdl-grid">
         <table class="mdl-data-table">
           <thead>
             <tr>
@@ -45,6 +48,8 @@ export default {
   data: () => {
     return {
       echoList: [],
+      totalDelta: 0,
+      count: 0,
     };
   },
   created() {
@@ -56,12 +61,15 @@ export default {
       data.size = data.text.length;
       data.delta = now - time;
       this.echoList.unshift(data);
+
+      this.totalDelta += data.delta;
+      this.count ++;
     });
     socket.on('hello', () => {
-      for (let i = 1; i < 1000; i += 100) {
+      for (let i = 1; i < 2000; i += 100) {
         setTimeout(() => {
           this.sendPing();
-        }, i);
+        }, i + 500);
       }
     });
   },
