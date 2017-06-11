@@ -5,7 +5,7 @@
     <mdl-button v-on:click.native="sendPing()">send ping</mdl-button>
     <div class="mdl-layout">
       <div class="mdl-grid">
-        <p>count: {{count}}, AVG: {{totalDelta / count}}</p>
+        <p>count: {{count}}, AVG: {{fix(totalDelta / count)}}</p>
       </div>
       <div class="mdl-grid">
         <table class="mdl-data-table">
@@ -19,9 +19,9 @@
           </thead>
           <tbody>
             <tr v-for="item in echoList">
-              <td>{{item.time}}</td>
-              <td>{{item.now}}</td>
-              <td>{{item.delta}}</td>
+              <td>{{fix(item.time)}}</td>
+              <td>{{fix(item.now)}}</td>
+              <td>{{fix(item.delta)}}</td>
               <td>{{item.size}}</td>
             </tr>
           </tbody>
@@ -85,6 +85,9 @@ export default {
       }
       this.socket.emit('ppp', data);
       console.log('send');
+    },
+    fix(value, fix = 3) {
+      return Number(value).toFixed(fix);
     }
   },
 };
